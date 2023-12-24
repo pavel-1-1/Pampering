@@ -1,0 +1,16 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 150MB
+      max-request-size: 150MB
+
+  mvc:
+    static-path-pattern=/static/**
+
+server:
+  port: 80
+  host: 192.168.0.10
+
+dir-file:
+  file: files
+  text: texts

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <form action="http://192.168.0.10:80/text" method="post" class="form" id="outText">
+        <div class="form">
+            <p class="form-p"><label for="text1">Enter your title: </label>
+            <input type="text" name="title" id="text1" placeholder="title" required/></p>
+            <p><label for="text">Enter your text: </label>
+            <input type="text" name="text" id="text" placeholder="text" required/></p>
+            <button type="submit">To send text</button>
+        </div>
+    </form>
+    <form action="http://192.168.0.10:80/file" method="post" class="form" enctype="multipart/form-data"
+    id="outFile">
+        <div class="form">
+           <p class="form-p"><label for="file">Select your file: </label>
+            <input type="file" name="file" id="file" multiple required/></p>
+            <button type="submit">To send file</button>
+        </div>
+    </form>
+</body>
+</html>
