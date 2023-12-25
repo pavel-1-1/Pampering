@@ -1,0 +1,16 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+      enabled: false
+  mvc:
+    ${STATIC_PATH}
+
+server:
+  port: ${SERVER_PORT}
+  host: ${SERVER_HOST}
+
+dir-file:
+  file: files
+  text: texts
