@@ -22,6 +22,7 @@ public class StorageService {
     private String dirFile;
     @Value("${dir-file.text}")
     private String dirText;
+    private String pathFile;
 
     @PostConstruct
     public void init() {
@@ -29,6 +30,7 @@ public class StorageService {
         File fileText = new File(dirText);
         if (!fileText.exists()) fileText.mkdir();
         if (!fileFile.exists()) fileFile.mkdir();
+        pathFile = fileFile.getAbsolutePath();
     }
 
     public RedirectView saveText(String json) {
@@ -50,14 +52,21 @@ public class StorageService {
     }
 
     public RedirectView saveFile(MultipartFile[] file) {
-        for (MultipartFile file1 : file) {
-            if (file1.isEmpty() || file1.getOriginalFilename() == null) return new RedirectView("/");
-            parseMultiFile(file1);
+        try {
+            for (MultipartFile file1 : file) {
+                if (file1.isEmpty() || file1.getOriginalFilename() == null) {
+                    return new RedirectView("/");
+                }
+                parseMultiFile(file1);
+                System.out.println("file loading: " + file1.getOriginalFilename());
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
         return new RedirectView("/");
     }
 
-    private void parseMultiFile(MultipartFile file) {
+    private void parseMultiFile(MultipartFile file) throws IOException {
         try (BufferedInputStream in = new BufferedInputStream(file.getInputStream())) {
             File dirSave = new File(dirFile, file.getOriginalFilename());
             Files.copy(in, Path.of(dirSave.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
